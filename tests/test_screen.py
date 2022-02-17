@@ -20,7 +20,6 @@ class TestCurses:
     @classmethod
     def setUpClass(cls):
         term = os.environ.get('TERM')
-
         if verbose:
             print(f'TERM={term}', file=sys.stderr, flush=True)
         # testing setupterm() inside initscr/endwin
@@ -29,6 +28,8 @@ class TestCurses:
         curses.setupterm(fd=stdout_fd)
 
     def setUp(self):
+        term = os.environ.get('TERM')
+        print(f'TERM={term}', file=sys.stderr, flush=True)
         # TODO: re-introduce more condtional setup
         self.stack = []
         self.isatty = True
@@ -108,6 +109,13 @@ class TestCurses:
             mocker.patch('curses.cbreak')
             mocker.patch('curses.nocbreak')
             mocker.patch('curses.endwin')
+        term = os.environ.get('TERM')
+
+        # This is for headless environments like GitHub Actions use, we'll have
+        # to create some other kind of fake "framebuffer"
+        if term == "unknown":
+            mocker.patch('curses.setupterm')
+
         self.setUp()
         try:
             yield
