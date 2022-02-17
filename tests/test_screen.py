@@ -114,7 +114,7 @@ class TestCurses:
         # This is for headless environments like GitHub Actions use, we'll have
         # to create some other kind of fake "framebuffer"
         # curses probably provides a test for this, we'll use this for now
-        if (term == "unknown") or (term == "dumb"):
+        if (term == "unknown") or (term == "dumb") or (term == "None") or Term is None:
             mocker.patch('curses.setupterm')
 
         self.setUp()
