@@ -1,0 +1,14 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+
+[dev-packages]
+pytest = ">=7.0.1"
+flake8 = ">=4.0.1"
+pytest-mock = ">=3.7.0"
+
+[requires]
+python_version = "3.9"
