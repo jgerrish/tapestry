@@ -31,7 +31,7 @@ jobs:
       run: |
         python -m pip install --upgrade pipenv wheel flake8 pytest
         python -m pip install --upgrade pip
-        if [ -f Pipfile ]; then pipenv install; fi
+        if [ -f Pipfile ]; then pipenv install --dev; fi
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
