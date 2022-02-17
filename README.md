@@ -1,4 +1,5 @@
 # tapestry minimal curses Python wrapper
+![python tests](https://github.com/jgerrish/tapestry/actions/workflows/python-package.yml/badge.svg)
 
 This Python package provides a set of minimal wrappers around the
 default curses library included with Python.
