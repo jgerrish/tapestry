@@ -117,9 +117,11 @@ class TestCurses:
         # This is for headless environments like GitHub Actions use, we'll have
         # to create some other kind of fake "framebuffer"
         # curses probably provides a test for this, we'll use this for now
-        if (term == "unknown") or (term == "dumb") or (term == "None") or Term is None:
+        if (term == "unknown") or (term == "dumb") or (term == "None") \
+           or term is None:
             mocker.patch('curses.setupterm')
-            # This may not be the proper pattern for context managers, but it works
+            # This may not be the proper pattern for context managers,
+            # but it works
             # Pressure is constraining me from working on this
             yield False
         else:
@@ -127,7 +129,8 @@ class TestCurses:
             try:
                 yield True
             except Exception as e:
-                sys.stderr.write("Caught exception in curses_test: {}\n".format(e))
+                sys.stderr.write(
+                    "Caught exception in curses_test: {}\n".format(e))
                 self.cleanUp()
                 raise e
             finally:
